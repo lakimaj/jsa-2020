@@ -3,6 +3,7 @@ const students = [
     {fname: 'Janko', lname: 'Perovski', gpa: 9.1},
     {fname: 'STanko', lname: 'Perovski', gpa: 7.0},
 ]
+//primer za listna niza objekt
 
 const getAllStudents = (req, res) => {
     return res.status(200).send(students);
