@@ -1,0 +1,19 @@
+resource name: students
+
+get all students
+GET /students
+
+get one student
+GET /students/12
+
+add new student
+POST /students
+
+delete a student (With ID 12)
+DELETE /students/12
+
+update whole student object (with ID 12)
+PUT /students/12
+
+update only certain property of student (with ID 12)
+PATCH /students/12
