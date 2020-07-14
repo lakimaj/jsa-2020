@@ -1,17 +1,19 @@
-const students = [
-    {fname: 'Pero', lname: 'Perovski', gpa: 6.1},
-    {fname: 'Janko', lname: 'Perovski', gpa: 9.1},
-    {fname: 'STanko', lname: 'Perovski', gpa: 7.0},
+const e = require("express");
+
+var students = [
+    {id: 1, fname: 'Pero', lname: 'Perovski', gpa: 6.1},
+    {id: 2, fname: 'Janko', lname: 'Perovski', gpa: 9.1},
+    {id: 3, fname: 'STanko', lname: 'Perovski', gpa: 7.0},
 ]
-//primer za listna niza objekt nov test
+//primer za niza objekt nov test
 
 const getAllStudents = (req, res) => {
     return res.status(200).send(students);
 }
 
 const getSingleStudent = (req, res) => {
-    if(students[req.param.id] !== undefined){
-    return res.status(200).send(students[req.param.id]);
+    if(students[req.params.id] !== undefined){
+        return res.status(200).send(students[req.params.id]);
     }
     return res.status(404).send('Not found');
 };
@@ -19,19 +21,56 @@ const getSingleStudent = (req, res) => {
 const createStudent = (req, res) => {
     if(req.body){
         students.push(req.body);
-    res.status(201).send('Created');
-}
-return res.status(404).send('Bad request');
+    return res.status(201).send('Created New User');
+    }
+    return res.status(404).send('Bad request');
 };
 
-const removeStudent = (req, res) => {
-    res.status(200).send('ok');
-}
+/* const removeStudent = (req , res) =>{
+    const found = students.findIndex((student) =>{
+        student.id === req.params.id
+    })
+    if (found) {
+        students.splice(found, 1)
+        res.status(200).json("Succesfully deleted")
+    }
+    else{
+        res.status(400).json('Bad request, no data found!')
+    }
+} */
+// **************** OD BOJAN so FILTER ********************
+const removeStudent = (req , res) => {
+    students = students.filter((e, i) => {
+        return e.id != parseInt(req.params.id);
+    });
+    res.status(204).send();
+};
 
+/* const updateStudent = (req, res) => {
+    if(data.students[req.params.id] != undefined){
+        if(req.body.fname !== undefined && req.body.lname !== undefined && req.body.gpa !== undefined) {
+            let student = {
+                fname: req.body.fname,
+                lname: req.body.lname,
+                gpa: req.body.gpa
+            };
+            data.students[req.params.id] = student;
+                return res.status(200).send("Ok");
+                }
+        else {
+            return res.status(400).send("Bad request");
+            }
+        }
+        else {
+            return res.status(404).send("Not Found");
+        }
+} */
+// ************** OD BOJAN so MAP ******************** bez validacija
 const updateStudent = (req, res) => {
-    res.status(200).send('ok');
-}
+    
 
+
+// ************** OD BOJAN so MAP ******************** 
 const patchStudent = (req, res) => {
     res.status(200).send('ok');
 }
