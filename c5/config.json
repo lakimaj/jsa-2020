@@ -1,0 +1,12 @@
+{
+    "db": {
+        "host": "cluster0-cf2wu.mongodb.net",
+        "port": 27017,
+        "dbname": "store",
+        "username": "new_user",
+        "password": "testtest"
+    },
+    "server": {
+        "port": 8090
+    }
+}
