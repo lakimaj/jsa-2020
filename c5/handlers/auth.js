@@ -1,10 +1,15 @@
 const validate = require('../pkg/user/validation');
 const user = require('../pkg/user');
+const bcrypt = require('bcrypt-node')
 
 const register = (req, res) => {
     validate.register(req.body)
     .then(matches => {
         if (!matches) {
+            res.status(400).send('bad request');
+            throw 'Bad request';
+        }
+        if (req.body.password !== req.body.password2) {
             res.status(400).send('bad request');
             throw 'Bad request';
         }
@@ -15,6 +20,7 @@ const register = (req, res) => {
             res.status(409).send('conflict');
             throw 'Conflict';
         }
+        req.body.password = bcrypt.hashSync(req.body.password);
         return user.createUser(req.body);
     })
     .then(() => {
