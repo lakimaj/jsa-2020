@@ -1,6 +1,7 @@
 const validate = require('../pkg/user/validation');
 const user = require('../pkg/user');
 const bcrypt = require('bcrypt-nodejs');
+const jwt = require('jsonwebtoken');
 
 const register = (req, res) => {
     validate.register(req.body)
