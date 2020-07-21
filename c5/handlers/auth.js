@@ -32,7 +32,28 @@ const register = (req, res) => {
 };
 
 const login = (req, res) => {
-    res.status(200).send('ok');
+    validate.login(req.body)
+        .then(matches => {
+            if(!matches) {
+                res.status(400).send('Bad request')
+                throw 'Bad request';
+            }
+            return user.createUser(req.body);
+        })
+        .then (u => {
+            if (u === null) {
+                res.status(400).send('Bad request')
+                throw 'Bad request';
+            }
+            if (!bcrypt.compareSync(req.body.password, u.password)) {
+                res.status(400).send('Bad request')
+                throw 'Bad request';
+            }
+            res.status(200).send('ok');
+        })
+        .catch(err => {
+            res.status(500).send('internal server error');
+        });
 }
 
 const logout = (req, res) => {
