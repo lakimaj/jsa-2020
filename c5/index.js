@@ -10,7 +10,7 @@ const api = express();
 
 api.use(bodyParser.json());
 
-api.post('/amp/v1/auth/register', auth.register);
+api.post('/api/v1/auth/register', auth.register);
 api.post('/api/v1/auth/login', auth.login);
 api.get('/api/v1/auth/logout', auth.logout);
 api.get('/api/v1/auth/refresh-tocken', auth.refresh);
