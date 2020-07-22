@@ -19,5 +19,5 @@ api.listen(conf.get('server').port, err => {
     if(err) {
         return console.error(err);
     }
-    console.log(`App started on port 9090`);
+    console.log(`App started on port ${conf.get('server').port}`);
 });

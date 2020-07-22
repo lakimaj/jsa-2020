@@ -2,11 +2,12 @@
     "db": {
         "host": "cluster0-cf2wu.mongodb.net",
         "port": 27017,
-        "dbname": "store",
+        "dbname": "test",
         "username": "new_user",
         "password": "testtest"
     },
     "server": {
-        "port": 8090
+        "port": 8090,
+        "key": "tajna"
     }
 }

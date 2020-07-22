@@ -24,12 +24,13 @@ const createUser = (data) => {
 };
 
 const getUserByEmail = (email) => {
+    console.log('Get Email is '+email);
     return new Promise((success, fail) => {
         User.findOne({email: email}, (err, data) => {
-                    if(err) {
+            if(err) {
                 return fail(err);
-            }
-            return success();
+            }       
+            return success(data);
         });
     });
 };

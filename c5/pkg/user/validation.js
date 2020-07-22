@@ -1,25 +1,25 @@
 var validator = require('node-input-validator');
 
 const registerSchema = {
-    first_name: 'reqired||minlength:2',
-    last_name: 'reqired||minlength:2',
-    email: 'reqired|email',
-    password: 'reqired|minlength:1',
-    password2: 'reqired|minlength:1'
+    first_name: 'required|minLength:2',
+    last_name: 'required|minLength:2',
+    email: 'required|email',
+    password: 'required|minLength:1',
+    password2: 'required|minLength:1'
 };
 
 const loginSchema = {
-    email: 'reqired|email',
-    password: 'reqired|minlength:1'
+    email: 'required|email',
+    password: 'required|minLength:1'
 }; 
 
 const register = (data) => {
-    let v = validator.Validator(data, registerSchema);
+    let v = new validator.Validator(data, registerSchema);
     return v.check();
 }
 
 const login = (data) => {
-    let v = validator.Validator(data, loginSchema);
+    let v = new validator.Validator(data, loginSchema);
     return v.check();
 }
 
