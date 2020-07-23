@@ -69,7 +69,7 @@ const logout = (req, res) => {
 };
 
 const refresh = (req, res) => {
-    res.status(200).send('ok');
+    res.status(200).send('ok tocken refreshed');
 };
 
 module.exports = {
