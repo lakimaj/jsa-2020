@@ -9,5 +9,9 @@
     "server": {
         "port": 8090,
         "key": "tajna"
+    },
+    "mailer": {
+        "domain": "sandbox426e61de831140ca86564228a6baf2db.mailgun.org",
+        "key": "ee6bb1d1a809e3ffc1f6535ee0681bae-a65173b1-8fa5fe44"
     }
 }

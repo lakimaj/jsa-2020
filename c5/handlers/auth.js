@@ -3,6 +3,7 @@ const user = require('../pkg/user');
 const bcrypt = require('bcrypt-nodejs');
 const jwt = require('jsonwebtoken');
 var config = require('../pkg/config');
+const mailer = require('../pkg/mailer');
 
 const register = (req, res) => {
     validate.register(req.body)
@@ -52,11 +53,14 @@ const login = (req, res) => {
                 throw { message: 'Bad request', code: 400 };
             }
             let payload = {
+                uid: u._id,
                 name: `${u.first_name} ${u.last_name}`,
                 email: u.email,
-                iat: parseInt(new Date().getTime()/1000)
+                iat: parseInt(new Date().getTime()/1000),
+                exp: parseInt((new Date().getTime() + (24 * 60 * 60 * 1000)) / 1000), // trae 24h
             };
             let token = jwt.sign(payload, config.get('server').key);
+            mailer.loginNotification(`${u.first_name} ${u.last_name}`, u.email);
             res.status(200).send({token: token});
         })
         .catch(err => {
@@ -69,7 +73,16 @@ const logout = (req, res) => {
 };
 
 const refresh = (req, res) => {
-    res.status(200).send('ok tocken refreshed');
+    let payload = {
+        uid: user.uid,
+        name: user.name,
+        email: user.email,
+        iat: parseInt(new Date().getTime()/1000),
+        exp: parseInt((new Date().getTime() + (24 * 60 * 60 * 1000)) / 1000), // trae 24h
+    };
+    let token = jwt.sign(payload, config.get('server').key);
+    console.log(req.user);
+    res.status(200).send({ token: token });
 };
 
 module.exports = {

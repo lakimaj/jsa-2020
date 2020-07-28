@@ -13,7 +13,7 @@ api.use(bodyParser.json());
 api.use(
     jwt({ 
     secret: conf.get('server').key, 
-    algorithms: ['HS256']
+    algorithms: ['HS256']  // HS256 e algoritam koj go koristime i mora tuka da go naznacime
     }
     )
     .unless({
